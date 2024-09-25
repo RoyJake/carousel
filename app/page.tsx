@@ -1,95 +1,59 @@
+"use client";
+
 import Image from "next/image";
-import styles from "./page.module.css";
+import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import "./page.css";
 
-export default function Home() {
+// import Image1 from "../public/images/image1.jpg";
+// import Image2 from "../public/images/image2.jpg";
+import Image3 from "../public/images/image3.jpg";
+import Image4 from "../public/images/image4.jpg";
+import Image5 from "../public/images/image5.jpg";
+import Image6 from "../public/images/image6.jpg";
+import Image7 from "../public/images/image7.jpg";
+// import Image8 from "../public/images/image8.jpg";
+import Image9 from "../public/images/image9.jpg";
+import Image10 from "../public/images/image10.jpg";
+// import Image11 from "../public/images/image11.jpg";
+import Image12 from "../public/images/image12.jpg";
+import Image13 from "../public/images/image13.jpg";
+
+const imageArray = [
+  Image3,
+  Image4,
+  Image5,
+  Image6,
+  Image7,
+  Image9,
+  Image10,
+  Image12,
+  Image13,
+];
+
+const CarouselPage = () => {
+  const [width, setWidth] = useState(0);
+  const carousel = useRef(null);
+
+  useEffect(() => {
+    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+  }, []);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div ref={carousel} className="carousel">
+      <motion.div
+        drag="x"
+        dragConstraints={{ right: 0, left: -width }}
+        className="inner-carousel"
+      >
+        {imageArray.map((image, index) => (
+          <div key={index} className="item">
+            <Image key={index} src={image} alt={`${index}`} className="image" />
+          </div>
+        ))}
+      </motion.div>
     </div>
   );
-}
+};
+
+export default CarouselPage;

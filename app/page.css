@@ -6,6 +6,7 @@
 
 body {
   margin: 10% 20%;
+  background-color: #f0f0f0;
 }
 
 .carousel {
@@ -15,6 +16,8 @@ body {
 
 .inner-carousel {
   display: flex;
+  width: fit-content;
+  background-color: #0a192f;
 }
 
 .item {
@@ -28,4 +31,5 @@ body {
   width: 100%;
   border-radius: 20px;
   pointer-events: none;
+  border: 2px solid #f0f0f0;
 }
